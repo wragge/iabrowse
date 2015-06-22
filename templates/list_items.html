@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<h2 class="page-header">{{ item.title }}</h2>
+<h3 class="text-muted">{% if previous_item %}<a class="text-muted" href="/browse?series={{item.series}}&control={{previous_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> {% endif %}NAA: {{item.series}}, {{item.control_symbol}}{% if next_item %} <a class="text-muted" href="/browse?series={{item.series}}&control={{next_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>{% endif %}</h3>
+
+<div class="images">
+{% for image in images %}
+
+<a title="NAA: {{item.series}}, {{item.control_symbol}}, p. {{image.page}}" class="image-cell text-center" href="http://invisibleaus.s3.amazonaws.com/{{item.series|replace('/','-')|urlencode}}/{{item.control_symbol|replace('/','-')|urlencode}}-%5B{{image.identifier}}%5D/{{image.identifier}}-p{{image.page}}.jpg"><img src="http://invisibleaus.s3.amazonaws.com/{{item.series|replace('/','-')|urlencode}}/{{item.control_symbol|replace('/','-')|urlencode}}-%5B{{image.identifier}}%5D/thumbs/{{image.identifier}}-p{{image.page}}-200.jpg"></a>
+
+{% endfor %}
+</div>
+
+
+{% endblock %}

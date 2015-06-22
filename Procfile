@@ -1,0 +1,1 @@
+web: gunicorn iabrowse:app --log-file=-
