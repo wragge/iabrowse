@@ -2,7 +2,7 @@
 {% block content %}
     
 <h2 class="page-header">{{ item.title }}</h2>
-<h3 class="text-muted">{% if previous_item %}<a class="text-muted" href="/browse?series={{item.series}}&control={{previous_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> {% endif %}NAA: {{item.series}}, {{item.control_symbol}}{% if next_item %} <a class="text-muted" href="/browse?series={{item.series}}&control={{next_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>{% endif %}</h3>
+<h3 class="text-muted">{% if previous_item %}<a id="previous" class="text-muted" href="/browse?series={{item.series}}&control={{previous_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> {% endif %}NAA: {{item.series}}, {{item.control_symbol}}{% if next_item %} <a id="next" class="text-muted" href="/browse?series={{item.series}}&control={{next_item.control_symbol}}"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>{% endif %}</h3>
 
 <div class="images">
 {% for image in images %}
