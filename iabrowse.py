@@ -16,6 +16,11 @@ def get_db():
 
 
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/series')
 def list_series():
     pipeline = [
         {"$group": {"_id": "$series", "items": {"$sum": 1}}},
