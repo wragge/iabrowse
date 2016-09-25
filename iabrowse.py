@@ -120,8 +120,8 @@ def browse_landscape():
             'ratio': {'$lt': 1}
         }},
         {'$sort': {'ratio': 1, 'identifer': 1, 'page': 1}},
-        {'$limit': 200},
-        {'$skip': start}
+        {'$skip': start},
+        {'$limit': 200}
     ]
     #if series:
     #    pipeline[1]['$match']['series'] = series
