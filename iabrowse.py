@@ -119,7 +119,6 @@ def browse_landscape():
             'series': {'$exists': True},
             'ratio': {'$lt': 1}
         }},
-        {'$sort': {'ratio': 1, 'identifer': 1, 'page': 1}},
         {'$skip': start},
         {'$sort': {'ratio': 1, 'identifer': 1, 'page': 1}},
         {'$limit': 200}
