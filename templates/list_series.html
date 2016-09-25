@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
     
-    <ul>
+    <h2>Series</h2>
+    <ul class="list-group">
     {% for s in series %}
-        <li><a href="/browse?series={{ s.series }}">{{ s.series }}</a></li>
+        <li class="list-group-item">
+            <span class="badge">{{ s.total }} items described</span>
+            <span class="badge">{{ s.digitised }} items digitised</span>
+        <a href="/series/{{ s.series|replace('/', '-')}}/">{{s.series}}</a>
+    </li>
     {% endfor %}
     </ul>
 

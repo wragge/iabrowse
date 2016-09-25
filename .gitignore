@@ -1,2 +1,6 @@
 *.pyc
 .env
+credentials.py
+utilities.py
+*.csv
+create_csv.py

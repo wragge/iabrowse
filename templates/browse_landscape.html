@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<h2 class="page-header">Landscape images</h2>
+
+<div class="arrows">
+<a id="previous" class="text-muted" href="/landscape/?start={{previous}}"><i class="fa fa-3x fa-chevron-circle-left" aria-hidden="true"></i></span></a> <a id="previous" class="text-muted" href="/landscape/"><i class="fa fa-3x fa-chevron-circle-up" aria-hidden="true"></i></span></a> <a id="next" class="text-muted" href="/landscape/?start={{next}}"><i class="fa fa-3x fa-chevron-circle-right" aria-hidden="true"></i></span></a>
+</div>
+
+<div class="images">
+{% for image in images %}
+
+{% if image.image_path %}
+<a title="NAA: {{image.series}}, {{image.control_symbol}}, p. {{image.page}}" class="image-cell text-center" href="/items/{{image.identifier}}/pages/{{image.page}}/"><img src="http://invisibleaus.s3.amazonaws.com/{{image.image_path}}/thumbs/{{image.identifier}}-p{{image.page}}-200.jpg" height="{{image.height}}px" width="{{image.width}}px"></a>
+{% endif %}
+
+{% endfor %}
+</div>
+
+<div class="arrows">
+<a id="previous" class="text-muted" href="/landscape/?start={{previous}}"><i class="fa fa-3x fa-chevron-circle-left" aria-hidden="true"></i></span></a> <a id="previous" class="text-muted" href="/landscape/"><i class="fa fa-3x fa-chevron-circle-up" aria-hidden="true"></i></span></a> <a id="next" class="text-muted" href="/landscape/?start={{next}}"><i class="fa fa-3x fa-chevron-circle-right" aria-hidden="true"></i></span></a>
+</div>
+
+
+
+{% endblock %}

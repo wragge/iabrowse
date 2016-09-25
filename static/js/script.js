@@ -1,14 +1,16 @@
 $(function() {
-    var $images = $('.images').isotope({
-      // options
-        "layoutMode": 'fitRows',
-        "itemSelector": ".image-cell",
-        "sortBy" : "original-order",
-        "fitRows": {"columnWidth": 200, "gutter": 5}
-    });
-    $images.imagesLoaded().progress( function() {
-        $images.isotope('layout');
-    });
+
+var $grid = $('.images').isotope({
+    "layoutMode": 'fitRows',
+    "itemSelector": ".image-cell",
+    "sortBy" : "original-order",
+    "fitRows": {"columnWidth": 200, "gutter": 5}
+});
+// layout Isotope after each image loads
+$grid.imagesLoaded().progress( function() {
+  $grid.isotope('layout');
+});
+
     $("body").keydown(function(e){
     // left arrow
     if (e.which == 37) {
