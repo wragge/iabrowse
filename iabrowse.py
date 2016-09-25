@@ -119,9 +119,9 @@ def browse_landscape():
             'series': {'$exists': True},
             'ratio': {'$lt': 1}
         }},
-        {'$sort': {'ratio': 1, 'identifer': 1, 'page': 1}},
-        {'$limit': 200},
-        {'$skip': start}
+        {'$sort': {'ratio': 1}},
+        {'$skip': start},
+        {'$limit': 200}
     ]
     #if series:
     #    pipeline[1]['$match']['series'] = series
