@@ -6,9 +6,19 @@
 .item-heading {
     margin-top: 20px;
     background-color: #0ce3ac;
-    display: block;
+    display: inline-block;
     height: 200px;
     color: #333333;
+    line-height: 200px;
+    font-size: 200%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+a.item-heading:hover {
+    opacity: 0.8;
+    color: #333333;
+    text-decoration: none;
 }
 
 .page-header { border-bottom: none;}
@@ -19,6 +29,10 @@ body {
 
 header {
     font-weight: lighter;
+    color: #333333;
+}
+
+header a, header a:hover {
     color: #333333;
 }
 
@@ -36,4 +50,39 @@ footer {
     font-weight: lighter;
     color: #333333;
     height: 300px;
+}
+.placeholders {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.circle-text {
+    display: inline-block;
+    font-size: 40px;
+    line-height: 160px;
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    background: #0ce3ac;
+    color: #333333;
+}
+
+a.circle-text:hover {
+    opacity: 0.8;
+    color: #333333;
+    text-decoration: none;
 }

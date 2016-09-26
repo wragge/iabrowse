@@ -3,14 +3,26 @@
     
 <h2>NAA: {{ series }}</h2>
 
-<div class="images">
-{% for item in items %}
-    <a title="NAA: {{item.series}}, {{item.control_symbol}}" class="image-cell item-heading text-center" href="/items/{{item.identifier}}/">{{item.control_symbol}}</a>
-    {% for image in item.images %}
-        <a title="NAA: {{item.series}}, {{item.control_symbol}}, p. {{image.page}}" class="image-cell text-center" href="/items/{{image.identifier}}/pages/{{image.page}}"><img src="http://invisibleaus.s3.amazonaws.com/{{item.series|replace('/','-')|urlencode}}/{{item.control_symbol|replace('/','-')|urlencode}}-%5B{{image.identifier}}%5D/thumbs/{{image.identifier}}-p{{image.page}}-200.jpg"></a>
-    {% endfor %}
-{% endfor %}
+<p class="lead">Last time we harvested them, there were&hellip;</p>
+
+<div class="row placeholders">
+    <div class="col-sm-4 placeholder">
+      <div class="circle-text">{{ items }}</div> 
+      <h4>items on RecordSearch</h4>
+    </div>
+    <div class="col-sm-4 placeholder">
+      <a href="/browse/?series={{series}}" class="circle-text">{{ digitised }}</a>
+      <h4>files digitised</h4>
+    </div>
+    <div class="col-sm-4 placeholder">
+      <a href="/series/{{series|replace('/', '-')}}/browse/" class="circle-text">{{ images }}</a>
+      <h4>page images</h4>
+    </div>
 </div>
+
+
+
+
 
 
 {% endblock %}

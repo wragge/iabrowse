@@ -17,7 +17,14 @@ def get_db():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    db = get_db()
+    pipeline = [
+        {"$group": {"_id": "$series"}}
+    ]
+    series = len(list(db.items.aggregate(pipeline)))
+    items = db.items.find({'digitised_status': True}).count()
+    images = db.images.find().count()
+    return render_template('home.html', series=series, items=items, images=images)
 
 
 @app.route('/series/')
@@ -38,10 +45,32 @@ def list_series():
 def show_series(identifier, start=None):
     series = identifier.replace('-', '/')
     db = get_db()
-    items = list(db.items.find({'series': series, 'digitised_status': True}).sort('control_symbol', ASCENDING).limit(10))
+    digitised = db.items.find({'series': series, 'digitised_status': True}).count()
+    items = db.items.find({'series': series}).count()
+    images = db.images.find({'series': series}).count()
+    return render_template('show_series.html', series=series, items=items, digitised=digitised, images=images)
+
+
+@app.route('/series/<identifier>/browse/')
+def browse_series(identifier):
+    start = request.args.get('start', None)
+    series = identifier.replace('-', '/')
+    db = get_db()
+    if start:
+        items = list(db.items.find({'series': series, 'digitised_status': True, 'control_symbol': {'$gte': start}}).sort('control_symbol', ASCENDING).limit(11))
+        previous = list(db.items.find({'series': series, 'digitised_status': True, 'control_symbol': {'$lt': start}}).sort('control_symbol', DESCENDING).limit(10))
+        try:
+            previous = previous[-1]['control_symbol']
+        except IndexError:
+            previous = None
+    else:
+        items = list(db.items.find({'series': series, 'digitised_status': True}).sort('control_symbol', ASCENDING).limit(11))
+        previous = None
+    next = items.pop()
+    next = next['control_symbol']
     for item in items:
         item['images'] = db.images.find({'identifier': item['identifier']}).sort('page', ASCENDING)
-    return render_template('show_series.html', series=series, items=items)
+    return render_template('browse_series.html', series=series, items=items, previous=previous, next=next)
 
 
 @app.route('/items/<identifier>/')
@@ -86,7 +115,7 @@ def show_page(identifier, page):
 
 
 @app.route('/browse/')
-def browse_series():
+def browse():
     series = request.args.get('series', None)
     print series
     if not series:

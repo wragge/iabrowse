@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<h2>NAA: {{ series }}</h2>
+
+{% if previous %}<a id="previous" class="text-muted" href="/series/{{series|replace('/', '-')}}/browse/?start={{previous}}"><i class="fa fa-3x fa-chevron-circle-left" aria-hidden="true"></i></span></a> {% endif %} <a id="series" class="text-muted" href="/series/{{series|replace('/','-')}}/"><i class="fa fa-3x fa-chevron-circle-up" aria-hidden="true"></i></span></a> {% if next %} <a id="next" class="text-muted" href="/series/{{series|replace('/', '-')}}/browse/?start={{next}}"><i class="fa fa-3x fa-chevron-circle-right" aria-hidden="true"></i></span></a>{% endif %}
+
+<div class="images">
+{% for item in items %}
+    <a title="NAA: {{item.series}}, {{item.control_symbol}}" class="image-cell item-heading text-center" href="/items/{{item.identifier}}/">{{item.control_symbol}}</a>
+    {% for image in item.images %}
+        <a title="NAA: {{item.series}}, {{item.control_symbol}}, p. {{image.page}}" class="image-cell text-center" href="/items/{{image.identifier}}/pages/{{image.page}}"><img src="http://invisibleaus.s3.amazonaws.com/{{item.series|replace('/','-')|urlencode}}/{{item.control_symbol|replace('/','-')|urlencode}}-%5B{{image.identifier}}%5D/thumbs/{{image.identifier}}-p{{image.page}}-200.jpg"></a>
+    {% endfor %}
+{% endfor %}
+</div>
+
+
+{% endblock %}
