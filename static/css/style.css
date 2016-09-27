@@ -46,10 +46,15 @@ header a, header a:hover {
     margin-top: 10px;
 }
 footer {
-    margin-top: 10px;
     font-weight: lighter;
     color: #333333;
     height: 300px;
+}
+
+.menubar {
+    padding-top: 10px;
+    background: #222222;
+    color: #ffffff;
 }
 .placeholders {
   margin-bottom: 30px;
