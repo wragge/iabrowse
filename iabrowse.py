@@ -100,6 +100,10 @@ def show_page(identifier, page):
     page = int(page)
     item = db.items.find_one({'identifier': identifier})
     image = db.images.find_one({'identifier': identifier, 'page': page})
+    subject = db.subjects.find_one({'meta_data.set_key': identifier, 'meta_data.page': str(page)})
+    subject_id = str(subject['_id'])
+    subject_set_id = str(subject['subject_set_id'])
+    status = subject['status']
     next = db.images.find({'identifier': identifier, 'page': {'$gt': page}}).sort('page', ASCENDING).limit(1)
     try:
         next_page = next.next()
@@ -111,7 +115,7 @@ def show_page(identifier, page):
     except StopIteration:
         previous_page = None
 
-    return render_template('show_page.html', item=item, image=image, next_page=next_page, previous_page=previous_page)
+    return render_template('show_page.html', item=item, image=image, subject=subject, subject_id=subject_id, subject_set_id=subject_set_id, status=status, next_page=next_page, previous_page=previous_page)
 
 
 @app.route('/browse/')

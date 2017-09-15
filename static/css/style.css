@@ -3,6 +3,11 @@
     margin-top: 20px;
 }
 
+.image-cell img {
+    display:block;
+    margin:auto;
+}
+
 .item-heading {
     margin-top: 20px;
     background-color: #0ce3ac;
@@ -90,4 +95,8 @@ a.circle-text:hover {
     opacity: 0.8;
     color: #333333;
     text-decoration: none;
+}
+
+.transcribed {
+    margin-top: 40px;
 }
