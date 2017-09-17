@@ -94,6 +94,17 @@ def show_item(identifier):
     return render_template('show_item.html', item=item, images=images, next_item=next_item, previous_item=previous_item)
 
 
+@app.route('/pages/')
+def list_pages():
+    db = get_db()
+    status = request.args.get('status', 'completed_fields')
+    if status == 'completed_fields':
+        completions = db.completions.count()
+        pages = list(db.images.find({'annotations': {'$exists': True}}).sort('control_symbol'))
+        total_pages = len(pages)
+    return render_template('list_pages.html', pages=pages, completions=completions, total_pages=total_pages)
+
+
 @app.route('/items/<identifier>/pages/<page>/')
 def show_page(identifier, page):
     db = get_db()
