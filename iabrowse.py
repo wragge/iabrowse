@@ -112,9 +112,14 @@ def show_page(identifier, page):
     item = db.items.find_one({'identifier': identifier})
     image = db.images.find_one({'identifier': identifier, 'page': page})
     subject = db.subjects.find_one({'meta_data.set_key': identifier, 'meta_data.page': str(page)})
-    subject_id = str(subject['_id'])
-    subject_set_id = str(subject['subject_set_id'])
-    status = subject['status']
+    if subject:
+        subject_id = str(subject['_id'])
+        subject_set_id = str(subject['subject_set_id'])
+        status = subject['status']
+    else:
+        subject_id = None
+        subject_set_id = None
+        status = None
     next = db.images.find({'identifier': identifier, 'page': {'$gt': page}}).sort('page', ASCENDING).limit(1)
     try:
         next_page = next.next()
